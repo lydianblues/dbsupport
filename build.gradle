@@ -1,0 +1,40 @@
+description = 'jPOS-EE :: Database Support Module'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'org.jpos.ee'
+version = '2.0.1-SNAPSHOT'
+
+repositories {
+    ivy {
+        /*
+         * Assumes build of jPOS was published to this local repository.
+         */
+        url = 'file:///opt/ivy-repository'
+    }
+    flatDir {
+        dirs '/opt/postgresql'
+    }
+    mavenCentral()
+    maven {
+        name = 'oracle'
+        url = 'http://download.oracle.com/maven'
+    }
+}
+
+dependencies {
+    compile 'org.jpos:jpos:1.9.3-SNAPSHOT'
+    compile 'org.hibernate:hibernate-core:4.2.4.Final'
+    compile 'commons-lang:commons-lang:20030203.000129'
+    compile ':postgresql:9.2-1003.jdbc4'
+}
+
+uploadArchives {
+    repositories {
+        ivy {
+            url "file:///opt/ivy-repository"
+        }
+    }
+}
+
